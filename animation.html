@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        function* iterTree(tree) {
+            if (Array.isArray(tree)) {
+                for (let i = 0; i < tree.length; i++) {
+                    yield* iterTree(tree[i]);
+                }
+            } else {
+                yield tree;
+            }
+        }
+
+        const tree = [[['a'], 'b', ['c']], 'd', [['e'], 'f', ['g']]];
+
+        for (let x of iterTree(tree)) {
+            console.log(x);
+        }
+        var times = 0;
+        var bubbleSort = function (arr) {
+            for (var i = 0; i < arr.length - 1; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {//如果前面的数据比后面的大就交换
+                        var temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                    console.log("第" + (++times) + "次排序后：" + arr);
+                }
+            }
+            return arr;
+        }
+        console.log("The result is:" + bubbleSort([2, 5, 4, 1, 7, 3, 8, 6, 9, 0]));
+    </script>
+    <style type="text/css">
+        body {
+            background: #fff;
+            height: 300px;
+        }
+
+        .flexMenu {
+            height: 200px;
+            width: 100px;
+            position: absolute;
+            top: 50%;
+            right: -80px;
+            margin-top: -100px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition: 0.5s;
+        }
+
+        .flexMenu:hover {
+            right: 0px;
+        }
+
+        .animationTest {
+            height: 50px;
+            width: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            animation: myAnimation 0.5s infinite;
+        }
+
+        @keyframes myAnimation {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        .animationBox {
+            margin-top: 10px;
+            width: 400px;
+            height: 200px;
+            background: linear-gradient(to bottom left, #000, #fff);
+            /* 标准的语法 */
+            border: blue 1px solid;
+        }
+
+        .animationBox:hover {
+            box-shadow: 0 0 6px blue;
+        }
+
+        .animationItem {
+            height: 20px;
+            width: 0px;
+            background: yellow;
+            position: relative;
+            animation: 0.5s animationItemDymanic forwards;
+            margin-bottom: 5px;
+        }
+
+        .animationItem .arrow {
+            height: 0px;
+            width: 0px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid yellow;
+            position: absolute;
+            right: -10px;
+        }
+
+        @keyframes animationItemDymanic {
+            from {
+                width: 0px;
+            }
+            to {
+                width: 120px;
+            }
+        }
+
+        .beCenterBox {
+            height: 500px;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+        }
+
+        .beCenter {
+            margin: auto;
+            background: rgba(0, 0, 0,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .beCenterAnimation {
+            animation: beCenterFrame 0.5s forwards;
+        }
+
+        @keyframes beCenterFrame {
+            from {
+                background: rgba(0, 0, 0,0.2);
+            }
+            to {
+                background: rgba(0, 0, 0, 0);
+                transform: scale(1.2)
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        function even(n) {
+            return n === 0 || odd(n - 1);
+        }
+        function odd(n) {
+            return n !== 0 && even(n - 1);
+        }
+        even(10);
+    </script>
+</head>
+
+<body>
+    <div class="flexMenu">
+        张仁玲
+    </div>
+    <div class="animationTest">
+
+    </div>
+    <div class="animationBox">
+        <div class="animationItem">
+            <div class="arrow"></div>
+        </div>
+        <div class="animationItem">
+            <div class="arrow"></div>
+        </div>
+        <div class="animationItem">
+            <div class="arrow"></div>
+        </div>
+        <div class="animationItem">
+            <div class="arrow"></div>
+        </div>
+    </div>
+    <div class="beCenterBox">
+        <div class="beCenter"></div>
+    </div>
+    <script type="text/javascript">
+        var animationBoxes = document.querySelectorAll(".animationItem");
+        animationBoxes.forEach(function (v, i) {
+            v.style.animationDelay = 0.5 * (i++) + "s";
+        });
+        document.querySelector(".beCenterBox").onclick = function () {
+            var beCenter = document.querySelector(".beCenter");
+            if (beCenter.classList.contains('beCenterAnimation')) {
+                beCenter.classList.remove('beCenterAnimation');
+            }
+            setTimeout(() => beCenter.classList.add("beCenterAnimation"), 0)
+            // setTimeout(function () { beCenter.classList.add("beCenterAnimation"); }, 0)
+
+        };
+    </script>
+</body>
+
+</html>
